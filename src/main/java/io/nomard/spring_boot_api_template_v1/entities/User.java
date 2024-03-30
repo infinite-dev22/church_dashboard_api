@@ -14,14 +14,11 @@
 
 package io.nomard.spring_boot_api_template_v1.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -35,53 +32,41 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(targetEntity = UserProfile.class, mappedBy = "user")
-    @JsonIgnore
-    private UserProfile userProfile;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @JsonIgnore
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "other_name")
+    private String otherName;
+
+    private String phone;
     private String email;
-    @JsonIgnore
-    private String password;
+    private String address;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    @JsonIgnore
-    private Set<Role> roles;
+    @Column(name = "date_joined")
+    private Date dateJoined;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "received_by")
+    private User receivedBy;
 
     @Column(nullable = false)
     @Builder.Default
-    @JsonIgnore
     private boolean active = true;
 
-    @Column(nullable = false)
-    @Builder.Default
-    @JsonIgnore
-    private boolean locked = false;
-
-    @Column(name = "access_all_branches", nullable = false)
-    @Builder.Default
-    @JsonIgnore
-    private boolean accessAllBranches = false;
-
     @Column(name = "created_at")
-    @JsonIgnore
     private Date createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
-    @JsonIgnore
     private User createdBy;
 
     @Column(name = "updated_at")
-    @JsonIgnore
     private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by")
-    @JsonIgnore
     private User updatedBy;
 }

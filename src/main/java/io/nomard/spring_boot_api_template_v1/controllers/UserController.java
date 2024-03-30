@@ -3,8 +3,10 @@ package io.nomard.spring_boot_api_template_v1.controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.nomard.spring_boot_api_template_v1.entities.User;
 import io.nomard.spring_boot_api_template_v1.errors.NotFoundException;
+import io.nomard.spring_boot_api_template_v1.models.DataCount;
 import io.nomard.spring_boot_api_template_v1.models.FindModel;
 import io.nomard.spring_boot_api_template_v1.models.SearchModel;
+import io.nomard.spring_boot_api_template_v1.models.UserModel;
 import io.nomard.spring_boot_api_template_v1.services.implementations.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,16 @@ public class UserController {
         return userService.getAll(pageNo, pageSize);
     }
 
+    @GetMapping("/count")
+    public Long countAll() {
+        return userService.countAll();
+    }
+
+    @GetMapping("/count/date_joined")
+    public List<DataCount> countGroupByDateJoined() {
+        return userService.countAllByDateJoined();
+    }
+
     @GetMapping("/single")
     public User getById(@RequestBody FindModel findModel) throws NotFoundException {
         return userService.getById(findModel.getId());
@@ -36,12 +48,12 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ObjectNode save(@Valid @RequestBody User user) throws NotFoundException {
+    public ObjectNode save(@Valid @RequestBody UserModel user) throws NotFoundException {
         return userService.add(user).getBody();
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ObjectNode> update(@Valid @RequestBody User user) throws NotFoundException {
+    public ResponseEntity<ObjectNode> update(@Valid @RequestBody UserModel user) throws NotFoundException {
         return userService.update(user);
     }
 

@@ -14,10 +14,11 @@
 
 package io.nomard.spring_boot_api_template_v1.models;
 
-import io.nomard.spring_boot_api_template_v1.entities.Role;
+import io.nomard.spring_boot_api_template_v1.entities.User;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -32,12 +33,11 @@ public class UserModel implements Serializable {
     private String otherName;
     private String email;
     private String phone;
-    private Set<Role> roles;
+    private String address;
+    private Date dateJoined;
+    private User receivedBy;
     @Builder.Default
     private boolean active = true;
     @Builder.Default
     private boolean locked = false;
-    @Builder.Default
-    private boolean accessAllBranches = false;
-    private String avatar;
 }
