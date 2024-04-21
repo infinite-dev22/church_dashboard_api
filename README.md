@@ -4,8 +4,8 @@
 
 This project provides a robust Spring Boot web API template equipped with the following core features:
 
-* **Secure Authentication and Authorization:** Implemented using JSON Web Tokens (JWT) to protect API endpoints and manage user access.
-* **Pre-created User Functionality:** Streamlines the development process by including a basic user model and associated management endpoints.
+* **Secure Authentication and Authorization:** Implemented using JSON Web Tokens (JWT) to protect API endpoints and manage member access.
+* **Pre-created User Functionality:** Streamlines the development process by including a basic member model and associated management endpoints.
 * **Robust API Base:** Offers a well-structured foundation for building out custom API functionalities.
 
 **API Signup Endpoint**
